@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 웹페이지 정보 -->
+  <meta name="author" content="portfolio">
+  <meta name="keywords" content="portfolio,personal portfolio,web portfolio,design port folio,포트폴리오,개인 포트폴리오,웹 포트폴리오,디자인 포트폴리오">
+  <meta name="discription" content="풀스택 개발자를 꿈꾸는 초보 웹퍼블리셔/디자이너의 포트폴리오">
+  <meta name="copyright" content="cho hwan-joon">
+  <!-- 오픈그래픽 -->
+  <meta property="og:title" content="portfolio">
+  <meta property="og:url" content="http://weprime.dothome.co.kr/portfolio">
+  <meta property="og:image" content="./images/ogimage.png">
+  <meta property="og:discription" content="풀스택 개발자를 꿈꾸는 초보 웹퍼블리셔/디자이너의 포트폴리오">
+  <!-- 트위터 -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="portfolio">
+  <meta name="twitter:url" content="http://weprime.dothome.co.kr/portfolio">
+  <meta name="twitter:image" content="./images/ogimage.png">
+  <meta name="twitter:discription" content="풀스택 개발자를 꿈꾸는 초보 웹퍼블리셔/디자이너의 포트폴리오">
+
+  <title>PortFolio</title>
+  <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+  <style>
+    /* 공통 스타일 */
+    .header,.footer{
+      padding:0 12px;
+    }
+    .section{
+      padding:80px 12px;
+    }
+    .container{
+      width:100%;
+      max-width:1200px;
+      margin:0 auto;
+    }
+    i::before,i::after{
+      font-weight:600;
+    }
+    /* 스킵네비 스타일 */
+    .skip>a{
+      display:block;
+      width:30%;
+      padding:1rem;
+      background-color:#fff;
+      font-size:2rem;
+      color:#df0000;
+      text-align:center;
+      position:fixed;
+      left:50%;
+      top:-100%;
+      transform:translate(-50%,-50%);
+      z-index:10000;
+      outline: 1px solid #df0000;
+    }
+    .skip>a:focus{
+      top:50%;      
+    }
+
+    /* 헤더스타일 */
+    .header.mo_scroll{
+      background-color:#000;
+    }
+    .header.mo_scroll .main_tit a{
+      filter:grayscale(1);
+    }
+    .header.mo_scroll .nav_content{
+      background-color:#000;
+    }
+    .header.mo_scroll .btn_open_nav{
+      border-color:#fff;
+    }
+    .header.mo_scroll .btn_open_nav li{
+      background-color:#fff;
+    }
+    .header.mo_scroll .sns i::before{
+      color:#fff;
+    }
+    .header{
+      position:fixed;
+      left:0;
+      right:0;
+      top:0;
+      background-color:#fff;
+      z-index:9000;
+      transition:0.3s;
+    }
+    .header_content{
+      display:flex;
+      flex-flow:row nowrap;
+      justify-content:space-between;
+      align-items:center;
+      height:50px;
+    }
+    .main_tit a{
+      font-size:1.5rem;
+      font-weight:700;
+      color:#ff9600;
+      transition:0.3s;
+    }
+    .btn_open_nav{
+      width:1.625rem;
+      height:1.625rem;
+      border:2px solid #333;
+      border-radius:5.2px;
+      cursor:pointer;
+      display:flex;
+      flex-flow:column nowrap;
+      justify-content:space-evenly;
+      align-items:center;
+      transition:0.3s;
+    }
+    .btn_open_nav li{
+      text-indent:-9999px;
+      overflow:hidden;
+      width:14px;
+      height:2px;
+      background-color:#333;
+      transition:0.3s;
+    }
+    .nav{
+      position:fixed;
+      left:100%;/*안보이는상태 */
+      right:-100%;/*안보이는상태 */
+      top:0;
+      bottom:0;
+      z-index:9999;
+      background-color:rgba(0,0,0,0.2);
+      display:flex;
+      flex-flow:row nowrap;
+      justify-content:flex-end;
+      transition:0.2s;
+    }
+    .nav.active{
+      left:0;/*보이는상태 */
+      right:0;/*보이는상태 */
+    }
+    .nav_content{
+      width:100%;
+      max-width:375px;      
+      background-color:#fff;
+      display:flex;
+      flex-flow:column nowrap; 
+      transition:0.3s;           
+    }
+    .btn_nav_close{
+      height:50px;
+      margin-bottom:14px;
+      display:flex;
+      flex-flow:row nowrap;
+      justify-content:flex-end;
+      align-items:center;
+    }
+    .btn_nav_close i{
+      padding:12px;
+    }
+    .btn_nav_close i:before{
+      font-size:32px;
+    }
+    .main_nav{
+      margin-bottom:32px;
+    }
+    .main_nav li:nth-child(2n+1){
+      height:44px;
+      padding-left:14px;
+      display:flex;
+      flex-flow:row nowrap;
+      justify-content:flex-start;
+      align-items:center;
+    }
+    .main_nav li:nth-child(2n+1) a{
+      display:inline-block;
+      width:100%;
+      background-color:transparent;
+    }
+    .main_nav li:nth-child(2n+1):hover{
+      background-color:#df0000;
+    }
+    .main_nav li:nth-child(2n+1):hover a{
+      font-weight:700;
+      color:#fff;
+    }
+    .main_nav li:nth-child(2n){
+      height:1px;
+      padding:0 12px;
+      background-color:#ccc;
+      background-clip:content-box;
+      text-indent: -9999px;;
+    }
+    .sns{
+      display:flex;
+      flex-flow:row nowrap;
+      justify-content:center;
+      
+    }
+    .sns i:before{
+      font-size:32px;
+      padding:0 10px;
+      transition:0.3s;
+    }
+    /* 인트로 스타일 */
+    .intro{      
+      max-width:2000px;
+      height:360px;
+      margin:50px auto 0;
+      padding-top:82px;
+      overflow:hidden;
+      position:relative;
+    }
+    
+    .intro .my_slider .slider{
+      position:absolute;
+      left:0;
+      right:0;
+      top:0;
+      bottom:0;      
+      background-position:center;
+      background-size:640px;
+      opacity:0;
+      transition:0.3s;
+    }
+    .intro .my_slider .slider01{
+      background-image:url(./images/slider_img01.png);
+    }
+    .intro .my_slider .slider02{           
+      background-image:url(./images/slider_img02.png);
+    }
+    .intro .my_slider .slider.active{
+      opacity:1;
+    }
+    .slider .btn_more,.btn_page,.btn_prev,.btn_next{
+      cursor: pointer;
+    }
+    .slider h3,.slider p{
+      font-size:36px;
+      color:#333;
+      text-align:center;
+      padding:38px 0;
+      text-shadow:0 0 1px #fff;;
+    }
+    .slider p{
+      font-size:16px;
+      line-height:30px;
+      padding:0;
+    }
+    .slider .btn_more{
+      width:132px;
+      height:44px;
+      margin:10px auto 32px;
+      background-color:#df0000;
+      font-size:18px;
+      font-weight:bold;
+      color:#fff;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .slider02 .btn_more{
+      background-color:#ff9600;
+      color:#181818;
+    }
+    .btn_page{
+      display:flex;
+      flex-flow:row nowrap;
+      justify-content:center;
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:24px;
+      z-index:2;
+    }
+    .btn_page li{
+      width:10px;
+      height:10px;
+      margin: 0 5px;
+      border:1px solid #333;
+      border-radius:50%;
+      background-color:#fff;
+      text-indent:-9999px;
+    }
+    .btn_page li.active{
+      background-color:#ff9600;
+    }
+    .btn_prev_next{
+      padding:0 24px;
+      position:absolute;
+      left:0;
+      right:0;
+      top:50%;
+      z-index:2;
+      transform:translateY(-50%);
+      display:none;
+      justify-content:space-between;
+    }
+    .btn_prev_next i::before{
+      font-size:56px;
+    }
+
+    /* about스타일 */
+    .about_content,.skills_content,.portfolio_content{
+      display:flex;
+      flex-flow:row wrap;
+      overflow:hidden; 
+      position:relative;     
+    }
+    .about_content::before{
+      content:'Scroll';
+      display:block;
+      /* width:16px; */
+      /* height:24px; */
+      /* background:red url(./images/ico-mouse.png) no-repeat center; */
+      position:absolute;
+      left:50%;
+      top:40px;
+      transform:translate(-50%,-50%);
+      font-size:50px;
+      animation-name:plzscroll;
+      animation-duration:2s;
+      animation-iteration-count:infinite;
+    }
+    @keyframes plzscroll {
+      0%{
+        font-size:50px;
+      }
+      50%{
+        font-size:100px;
+      }
+      100%{
+        font-size:50px;
+      }
+    }
+    .about_content.hide::before{
+      display:none;
+    }
+
+    .about_content h3{
+      width:100%;
+      margin-bottom:40px;
+      font-size:14px;
+      line-height:24px;
+      text-align:right;
+      opacity:0;
+      transform:translateX(200px);
+      transition:0.3s;
+    }
+    .about_content h3.active{
+      opacity:1;
+      transform:translateX(0);
+    }
+    .about_content h2,
+    .skills_content h2,
+    .portfolio_content h2{
+      width:100%;
+      margin-bottom:40px;
+      font-size:24px;
+      font-weight:700;
+      line-height:36px;
+      text-align:center;
+      display:flex;
+      flex-flow:column nowrap;
+      justify-content: center;
+      opacity:0;
+      transform:translateY(100px);
+      transition-duration:0.3s;
+      transition-delay: 0.3s;
+    }
+    .about_content h2.active{
+      transform:translateY(0);
+      opacity:1;
+    }
+    .about_content>p,
+    .skills_content>p,
+    .portfolio_content>p{
+      width:100%;
+      margin-bottom:40px;
+      text-align:center;
+      display:flex;
+      flex-flow:column nowrap;
+      justify-content: center;
+      opacity:0;
+      transform:translateY(100px);
+      transition-duration:0.3s;
+      transition-delay: 0.6s;
+    }
+    .about_content p.active{
+      transform:translateY(0);
+      opacity:1;
+    }
+    .about_content .img_box,
+    .skills_content .img_box,
+    .portfolio_content .img_box{
+      width:100%;
+      margin-bottom:40px;
+    }
+    .about_content .btn_box{
+      width:100%;
+    }
+    .about_content .btn_more{
+      width:132px;
+      height:44px;
+      margin:0 auto;
+      border-radius:22px;
+      background-color:#ff9600;
+      font-size:18px;
+      line-height:44px;
+      text-align:center;
+      cursor:pointer;
+    }
+    .about_content .btn_more:hover{
+      background-color:#df0000;
+      color:#fff;
+    }
+    
+    /* skills 스타일 */
+    .skills{
+      background-color:#df0000;
+    }
+    .skills_content{
+      overflow:initial;
+    }
+    .skills_content h2,.skills_content p{
+      transform:none;
+      opacity:1;
+      color:#fff;
+    }
+    .skills_content .img_box{
+      margin-bottom:0;
+    }
+    .skills_content ul{
+      display:flex;
+      flex-flow:row wrap;
+      justify-content:space-between;
+    }
+    .skills_content ul li{
+      width:46.42857142857143%;
+      margin-bottom:30px;
+    }
+    
+    .skills_content ul li:nth-child(5),
+    .skills_content ul li:nth-child(6){
+      margin-bottom:0;
+    }
+    .skill_img{
+      width:66px;
+      margin:0 auto 9px;
+      filter:grayscale(1);
+    }
+    .skills_content ul li:hover .skill_img{
+      filter:grayscale(0);
+      transform:rotate(15deg) scale(1.1);
+    }
+    .skill_txt{
+      font-size:14px;
+      text-align:center;
+      color:#fff;
+    }
+    /* //portfolio스타일 */
+    .portfolio_content h2,
+    .portfolio_content>p{
+      opacity:1;
+      transform:none;
+    }
+    .portfolio_content .img_box{
+      margin-bottom:0;
+    }
+    .portfolio_content ul{
+      display:flex;
+      flex-flow:column wrap;
+      align-items:center;
+    }
+    .portfolio_content ul li{
+      width:46.42857142857143%;
+      margin-bottom:60px;
+      cursor:pointer;
+    }
+    .portfolio_content ul li:last-child{
+      margin-bottom:0;
+    }
+    .port_img{
+      margin-bottom:10px;
+      position:relative;
+      overflow:hidden;
+    }
+    .port_img::before,
+    .port_img::after{
+      content:'';
+      display:block;
+      position:absolute;
+      left:0;
+      right:0;
+      top:0;
+      bottom:0;
+      background-color:rgba(223, 0, 0, 0.2);
+      transform:translateY(100%);
+      transition:0.3s;
+    }
+    .port_img::after{
+      content:'클릭하시면 해당 프로젝트로 이동합니다.';
+      background-color:transparent;
+      color:#fff;
+      padding:1rem;
+      font-size:1.2rem;
+      display:flex;
+      justify-content:center;
+      align-items: center;
+      transform:translateY(0); 
+      opacity:0;
+      transition-delay:0.3s;     
+    }
+    .port_img:hover::before,
+    .port_img:hover::after{
+      transform:translateY(0%);
+      opacity:1;
+    }
+    .port_txt h3{
+      margin-bottom:10px;
+      font-size:18px;
+      font-weight:700;
+      text-align:center;
+      color:#333;
+    }
+    .port_txt p{
+      font-size:14px;
+      text-align:center;
+      line-height:18px;
+      color:#999;
+    }
+    /* footer 스타일 */
+    .footer{
+      padding:80px 12px;
+      background-color:#ff9600;
+    }
+    .e_mail{
+      font-size:24px;
+      color:#fff;
+      text-align:center;
+      margin-bottom:24px;
+      transition:0.1s;
+    }
+    .footer:hover .e_mail{
+      font-size:32px;
+      color:#333;
+    }
+    .footer_content>p{
+      font-size:16px;
+      color:#fff;
+      text-align:center;
+      margin-bottom:32px;
+    }
+    .footer_content>.row{
+      display:flex;
+      justify-content: space-between;
+
+    }
+    .footer_content>.row p,
+    .footer_content>.row p a{
+      font-size:14px;
+      color:#fff;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* 640px 이상 슬라이더 스타일 */
+    @media(min-width:640px){
+      .intro .my_slider .slider{
+        background-size:768px;
+      }
+    }
+
+    /* 768px이상 테블릿 스타일 */
+    @media(min-width:768px){
+      .header_content{
+        flex-flow:column nowrap;
+        height:82px;
+      }
+      .main_tit a {
+        font-size:1.875rem;
+      }
+      .nav{
+        position:static;
+        width:100%;
+      }
+      .nav_content{
+        position:relative;
+        max-width:100%;
+      }
+      
+      .main_nav{
+        margin:0;
+        display:flex;
+        flex-flow:row;
+        justify-content:center;
+        align-items:center;
+        transition:0.3s;
+      }
+      .main_nav li{
+        margin:0 1.432291666666667%;
+        padding:0 11px;
+      }
+      .main_nav li:nth-child(2n){
+        display:none;
+      }
+      .main_nav li:nth-child(2n+1){
+        height:36px;
+      }
+      .main_nav li:nth-child(2n+1):hover a{
+        font-weight:400;
+      }
+      .main_nav a{
+        color:#333;
+        transition:0.3s;
+      }
+      .header.mo_scroll .main_nav a{
+        color:#fff;
+      }
+      .sns{
+        position:absolute;
+        right:0;
+        top:-22px;
+      }
+      .sns i:before{
+        padding:0 0 0 15px;
+        font-size:1rem;
+      }
+      .btn_nav_close,.btn_nav{
+        display:none;
+      }
+      /* 인트로 스타일 */
+      .intro{
+        height:420px;
+        margin-top:83px;
+      }
+      .intro .my_slider .slider {
+        background-size: 105%;
+      }
+      .slider h3{
+        padding:86px 0 28PX;
+      }
+      .btn_page{
+        bottom:48px;
+      }
+      .about_content h3{
+        font-size:16px;
+      }
+      .about_content p{
+        width:56.98924731182796%;
+        margin-right:3.225806451612903%;
+        text-align:left;
+      }
+      .about_content .img_box{
+        width:31.18279569892473%;
+      }
+      /* skill 스타일 */
+      .skills_content ul{
+        width:65.59139784946237%;
+        margin:0 auto;
+      }
+      .skills_content ul li{
+        width:21.31147540983607%;
+        margin-right:18.0327868852459%;
+      }
+      .skills_content ul li:nth-child(3n){
+        margin-right:0;
+      }
+      /* //portfolio 스타일 */
+      .portfolio_content ul{
+        width:65.59139784946237%;
+        margin:0 auto;
+        flex-direction:row;
+        justify-content:space-between;
+      }
+      .portfolio_content ul li{
+        width:31.9672131147541%;
+      }
+      .portfolio_content ul li:nth-child(3){
+        margin-bottom:0;
+      }
+      .portfolio_content ul li:nth-child(2n+1){
+        margin-right:36.0655737704918%;
+      }
+      /* footer 스타일 */
+      .e_mail{
+        font-size:36px;
+        margin-bottom:42px;
+      }
+      .footer_content>p{
+        font-size:18px;
+        margin-bottom:56px;
+      }
+      .footer_content>.row p, .footer_content>.row p a{
+        font-size:16px;
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* 1200px이상 PC스타일 */
+    @media(min-width:1200px){
+      .header,.footer{
+        padding:0;
+      }
+      .header_content{
+        flex-flow:row nowrap;
+        height:69px;
+      }
+      .nav{
+        height:inherit;
+      }
+      .main_tit{
+        width:6.5%;
+        margin-right:2%;
+      }
+      .nav_content{
+        flex-flow:row nowrap;
+        justify-content:flex-end;
+        align-items:center;
+      }
+      .main_nav{
+        width:90.7103825136612%;
+        height:100%;
+        margin-right:9.289617486338798%;
+        justify-content:flex-end;
+      }
+      .main_nav li:nth-child(2n+1){
+        height:100%;
+        margin:0;
+        padding:0 32px;
+      }
+      
+      .sns{
+        position:static
+      }
+      .btn_prev_next{
+        display:flex;
+      }
+      .btn_page{
+        bottom:55px;
+      }
+      /* intro 스타일 */
+      .intro{
+        margin-top:70px;
+      }
+      /* about 스타일 */
+      .about_content h3{
+        font-size:18px;
+      }
+      .about_content h2,
+      .skills_content h2,
+      .portfolio_content h2{
+        width:23.5%;
+        margin-right:2%;
+        text-align:left;        
+      }
+      .about_content>p,
+      .skills_content>p,
+      .portfolio_content>p{
+        width:40.5%;
+        margin-right:10.5%;   
+        text-align:left;     
+      }
+      .about_content .img_box{
+        width:23.5%;
+      }
+      /* skills스타일 */
+      .skills_content p{
+        width:23.5%;
+        margin-right:2%;
+      }
+      .skills_content .img_box{
+        width:49%;
+      }
+      .skills_content ul{
+        width:100%;
+      }
+      .skills_content ul li{
+        width:30.61224489795918%;
+        margin-right:4.081632653061224%;
+      }
+      /* portfolio스타일 */
+      .portfolio_content h2,
+      .portfolio_content>p{
+        width:100%;
+      }
+      .portfolio_content ul{
+        width:83%;
+        align-items:flex-start;
+      }
+      .portfolio_content ul li{
+        width:14%;
+        margin-bottom:0;
+      }
+      .portfolio_content ul li:nth-child(2n+1){
+        margin-right:0;
+      }
+      /* footer  스타일 */
+      .e_mail{
+        font-size:60px;
+        margin-bottom:60px;
+      }
+      .footer_content>p{
+        font-size:36px;
+        margin-bottom:86px;
+      }
+      .footer_content>.row p, .footer_content>.row p a{
+        font-size:18px;
+      }
+    }
+  </style>
+  
+  
+</head>
+<body>
+  <!-- 스킵 네비게이션 -->
+  <div class="skip">
+    <a href="#home">홈으로 바로 가기</a>
+    <a href="#intro">인트로 바로 가기</a>
+    <a href="#about">내 소개 바로 가기</a>
+    <a href="#skills">내가 할 수 있는 것 바로가기</a>
+    <a href="#portfolio">내가 만든 것 들</a>
+  </div>
+
+  <div class="wrap" id="home">
+    <header class="header">
+      <div class="container">
+        <div class="content header_content">
+          <div class="main_tit">
+            <h1><a href="./index.html">CPF</a></h1>
+          </div>
+          <nav class="nav">
+            <div class="nav_content">
+              <div class="btn_nav_close" id="btn_nav_close">
+                <i class="fas fa-arrow-right"></i>
+              </div>
+              <ul class="main_nav">
+                <li><a href="#home">HOME</a></li>
+                <li class="main_nav_line">라인</li>
+                <li><a href="#intro">INTRO</a></li>
+                <li class="main_nav_line">라인</li>
+                <li><a href="#about">ABOUT ME</a></li>
+                <li class="main_nav_line">라인</li>
+                <li><a href="#skills">SKILLS</a></li>
+                <li class="main_nav_line">라인</li>
+                <li><a href="#portfolio">PORTFOLIO</a></li>
+                <li class="main_nav_line">라인</li>
+              </ul>
+              <ul class="sns">
+                <li>
+                  <a href="#">
+                    <i class="fab fa-facebook"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fab fa-instagram-square"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fab fa-google"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <div class="btn_nav">
+            <ul class="btn_open_nav" id="btn_open_nav">
+              <li>라인</li>
+              <li>라인</li>
+              <li>라인</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section class="section intro" id="intro">
+      <div class="container">
+        <div class="content intro_content">
+          <ul class="my_slider clearfix">
+            <li class="slider slider01 active">
+              <div class="slider_content">
+                <h3>환영합니다.</h3>
+                <p>
+                  동해물과 백두산이 마르고<br>
+                  남산위에 저 소나무 철갑을 두른듯<br>
+                  가을하늘 공활한데 높고 구름없이<br>
+                  이기상과 이 맘으로 충성을 다하여 괴로우나
+                </p>
+                <div class="btn_more">
+                  MORE
+                </div>                
+              </div>
+            </li>
+            <li class="slider slider02">
+              <div class="slider_content">
+                <h3>환영합니다.</h3>
+                <p>
+                  동해물과 백두산이 마르고<br>
+                  남산위에 저 소나무 철갑을 두른듯<br>
+                  가을하늘 공활한데 높고 구름없이<br>
+                  이기상과 이 맘으로 충성을 다하여 괴로우나
+                </p>
+                <div class="btn_more">
+                  MORE
+                </div>                
+              </div>
+            </li>
+          </ul>
+          <ul class="btn_page">
+            <li class="active">1슬라이드</li>
+            <li>2슬라이드</li>
+          </ul>
+          <div class="btn_prev_next">
+            <div class="btn_prev" id="btn_prev">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="btn_next" id="btn_next">
+              <i class="fas fa-chevron-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section about" id="about">
+      <div class="container">
+        <div class="content about_content">
+          <h3 class="h3">
+            아침일찍 일어나는 새가<br>
+            맛난 모이를 먹게된다
+          </h3>
+          <h2 class="h2">
+            안녕하세요<br>
+            감각적인 웹 디자이너와<br>
+            퍼블리셔를 꿈꾸는<br>
+            홍길동입니다.
+          </h2>
+          <p class="p">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et 
+            <br><br>
+            dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. 
+          </p>
+          <div class="img_box">
+            <img src="./images/my_face.png" alt="내얼굴">
+          </div>
+          <div class="btn_box">
+            <div class="btn_more">
+              MORE
+            </div>
+          </div>
+        </div>        
+      </div>
+    </section>
+    <section class="section skills" id="skills">
+      <div class="container">
+        <div class="content skills_content">
+          <h2 class="h2">
+            제가　다룰 수 있는<br>
+            Tools를 소개합니다.
+          </h2>
+          <p class="p">
+            최신의 트랜드를 반영하기 위하여 노력을 게을리하지 않습니다.
+          </p>
+          <div class="img_box">
+            <ul>
+              <li>
+                <div class="skill_img">
+                  <img src="./images/skills_ps.png" alt="포토샵">
+                </div>
+                <div class="skill_txt">
+                  PhotoShop
+                </div>
+              </li>
+              <li>
+                <div class="skill_img">
+                  <img src="./images/skills_ai.png" alt="일러스트">
+                </div>
+                <div class="skill_txt">
+                  Illustrator
+                </div>
+              </li>
+              <li>
+                <div class="skill_img">
+                  <img src="./images/skills_html.png" alt="HTML">
+                </div>
+                <div class="skill_txt">
+                  HTML
+                </div>
+              </li>
+              <li>
+                <div class="skill_img">
+                  <img src="./images/skills_css.png" alt="CSS">
+                </div>
+                <div class="skill_txt">
+                  CSS
+                </div>
+              </li>
+              <li>
+                <div class="skill_img">
+                  <img src="./images/skills_js.png" alt="javascript">
+                </div>
+                <div class="skill_txt">
+                  javaScript
+                </div>
+              </li>
+              <li>
+                <div class="skill_img">
+                  <img src="./images/skills_visual-studio.png" alt="비주얼 스튜디오">
+                </div>
+                <div class="skill_txt">
+                  Visual Studio
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>        
+      </div>
+    </section>
+    <section class="section portfolio" id="portfolio">
+      <div class="container">
+        <div class="content portfolio_content">
+          <h2 class="h2">내가 진행한 프로젝트들</h2>
+          <p class="p">
+            기초조사부터 퍼블리싱까지 
+            다양한 프로젝트를 만나보세요
+          </p>
+          <div class="img_box">
+            <ul>
+              <li class="hl_port">
+                <div class="port_img">
+                  <img src="./images/port_megabox.png" alt="megabox">
+                </div>
+                <div class="port_txt">
+                  <h3>Megabox</h3>
+                  <p>
+                    반응형 웹페이지<br>
+                    기획, 디자인, 제작
+                  </p>
+                </div>
+              </li>
+              <li class="hl_port">
+                <div class="port_img">
+                  <img src="./images/port_hansol.png" alt="hansol">
+                </div>
+                <div class="port_txt">
+                  <h3>Hansol</h3>
+                  <p>
+                    반응형 웹페이지 리뉴얼
+                  </p>
+                </div>
+              </li>
+              <li class="hl_port">
+                <div class="port_img">
+                  <img src="./images/port_indigo.png" alt="indigo">
+                </div>
+                <div class="port_txt">
+                  <h3>Indigo</h3>
+                  <p>
+                    반응형 웹페이지<br>
+                    기획, 디자인, 제작
+                  </p>
+                </div>
+              </li>
+              <li class="hl_port">
+                <div class="port_img">
+                  <img src="./images/port_mozilla.png" alt="mozilla">
+                </div>
+                <div class="port_txt">
+                  <h3>Mozilla</h3>
+                  <p>
+                    반응형 웹페이지 제작
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="container">
+        <div class="content footer_content">
+          <h2 class="h2 e_mail">
+            wangheng@nate.com
+          </h2>
+          <p class="p">
+            좋은소식 기다리겠습니다.!
+          </p>
+          <div class="row">
+            <p>
+              <a href="https://www.github.com/weprime" target="_blank">gitHub</a>
+            </p>
+            <p>Copyright 2021 CHO</p>
+          </div>
+        </div>          
+      </div>
+    </footer>
+  </div>
+
+  <script src="./js/jquery.min.js"></script>  
+  <script src="./js/prefixfree.min.js"></script>
+  <script>
+    $(function(){
+      let thisIndex = 0;
+      // 내비오픈 이벤트
+      $('#btn_open_nav').on('click',function(){
+        $('.nav').addClass('active');
+      })
+      // 내비크로스 이벤트
+      $('#btn_nav_close i').on('click',function(){
+        $('.nav').removeClass('active');
+      })
+      // 패이지네이션 이벤트
+      $('.btn_page li').on('click',function(){
+        $('.btn_page li').removeClass('active');
+        $(this).addClass('active');
+        thisIndex = $(this).index();
+        sliderChange();
+      })
+      // 앞으로 이벤트
+      $('#btn_prev').on('click',function(){
+        thisIndex == 0 ? thisIndex++ : thisIndex--;
+        sliderChange();
+      })
+        // 뒤로로 이벤트
+      $('#btn_next').on('click',function(){
+        thisIndex == 1 ? thisIndex-- : thisIndex++;
+        sliderChange();
+      })
+      //스크롤 이벤트
+      $(window).on('scroll',function(){
+        let docTop = $(document).scrollTop();
+        if(docTop >= 200){
+          $('.about_content h3,.about_content h2,.about_content p').addClass('active');
+          $('.about_content').addClass('hide');
+          $('.header').addClass('mo_scroll');
+        }else{
+          $('.about_content h3,.about_content h2,.about_content p').removeClass('active');
+          $('.about_content').removeClass('hide');
+          $('.header').removeClass('mo_scroll');
+        }        
+      })
+
+      //포트폴리오 링크
+      $('.hl_port').on('click',function(){
+        let actIndex = $(this).index();
+        if(actIndex == 0){
+          window.open('http://weprime.dothome.co.kr/megabox/');
+        }else if(actIndex == 1){
+          window.open('http://weprime.dothome.co.kr/hansol/');
+        }else if(actIndex == 2){
+          window.open('http://weprime.dothome.co.kr/indigo/');
+        }else{
+          window.open('http://weprime.dothome.co.kr/mozilla/');
+        }
+      })
+
+
+      function sliderChange(){
+        $('.slider').removeClass('active');
+        $('.slider').eq(thisIndex).addClass('active');
+      }
+
+
+    })
+  </script>
+</body>
+</html>
